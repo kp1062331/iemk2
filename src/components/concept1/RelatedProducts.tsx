@@ -8,19 +8,19 @@ const products = [
     eyebrow: "Domains",
     title: "Find a domain for your website",
     image: "https://media-www.sqspcdn.com/images/pages/flagship/websites/related-products/domains/domains-desktop-1000w.jpg",
-    href: "https://domains.squarespace.com"
+  
   },
   {
     eyebrow: "Professional Email",
     title: "Make it official with Google Workspace",
     image: "https://media-www.sqspcdn.com/images/pages/flagship/websites/related-products/professional-email/professional-email-desktop-1000w.jpg",
-    href: "/professional-email"
+
   },
   {
     eyebrow: "Online Stores",
     title: "Sell anything, everywhere",
     image: "https://media-www.sqspcdn.com/images/pages/flagship/websites/related-products/online-stores/online-store-desktop-3-1000w.jpg",
-    href: "/online-store"
+ 
   }
 ];
 
@@ -45,7 +45,6 @@ export function RelatedProducts() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <motion.a
-              href={product.href}
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -1,75 +1,111 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Lightbulb, Target, PenTool, Code2, Rocket, TrendingUp } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const steps = [
-  { id: "01", title: "Idea", icon: Lightbulb, desc: "We start by deeply understanding your vision and business objectives." },
-  { id: "02", title: "Strategy", icon: Target, desc: "Crafting a precise roadmap and architecture for scalable success." },
-  { id: "03", title: "Design", icon: PenTool, desc: "Creating intuitive, premium interfaces that users love." },
-  { id: "04", title: "Development", icon: Code2, desc: "Engineering robust, secure, and highly performant solutions." },
-  { id: "05", title: "Launch", icon: Rocket, desc: "Seamless deployment with zero downtime and full support." },
-  { id: "06", title: "Scale", icon: TrendingUp, desc: "Continuous iteration and scaling to drive exponential growth." }
+  {
+    num: "01",
+    title: "Discovery & Architecture",
+    body: "We embed with your team to map every business constraint, user need, and technical debt. Then we design a scalable architecture — not just an MVP.",
+    tag: "2–4 weeks",
+  },
+  {
+    num: "02",
+    title: "Design & Prototyping",
+    body: "High-fidelity prototypes that your stakeholders can click through. We validate before we build, cutting expensive rework by 80%.",
+    tag: "3–5 weeks",
+  },
+  {
+    num: "03",
+    title: "Engineering Sprints",
+    body: "Two-week sprints, daily standups, and a shared Slack channel. You always know exactly what's being built and why.",
+    tag: "8–24 weeks",
+  },
+  {
+    num: "04",
+    title: "QA & Security Audit",
+    body: "Automated test coverage above 90%, OWASP security checks, load testing up to 10× expected traffic, and a final sign-off from our principal engineer.",
+    tag: "2–3 weeks",
+  },
+  {
+    num: "05",
+    title: "Launch & Handover",
+    body: "Zero-downtime deployment, full documentation, team training, and a 90-day support retainer. You own everything, including the IP.",
+    tag: "Ongoing",
+  },
 ];
 
-export function ScrollStory() {
-  const targetRef = useRef<HTMLDivElement>(null);
+export function Process() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: containerRef,
+    offset: ["start start", "end end"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "calc(-100% + 100vw)"]);
-  // Progress bar scales from 0 to 1 based on scroll
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
+  const lineH = useTransform(smooth, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-[#050816]">
-      {/* Scroll Progress Bar */}
-      <motion.div 
-        style={{ scaleX }}
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] origin-left z-50"
-      />
+    <section ref={containerRef} className="relative bg-black border-b border-white/10">
+      {/* Sticky header */}
+      <div className="sticky top-0 z-10 bg-black/95 backdrop-blur-sm border-b border-white/10 px-8 md:px-16 py-4 flex items-center justify-between">
+        <span className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Our Engineering Process</span>
+        <span className="text-xs text-white/20 font-mono">05 Phases</span>
+      </div>
 
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(108,99,255,0.08)_0%,_transparent_50%)] pointer-events-none" />
-        
-        <div className="w-full z-10">
-          <div className="mb-12 max-w-2xl px-6 md:px-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Engineering Process</h2>
-            <p className="text-slate-400 text-lg">A proven methodology from concept to scale.</p>
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] min-h-screen">
+        {/* Left: sticky title column */}
+        <div className="hidden md:flex flex-col justify-center px-16 py-24 border-r border-white/10 sticky top-16 h-[calc(100vh-4rem)] self-start">
+          <h2 className="text-6xl font-black tracking-tighter leading-tight text-white uppercase">
+            How We<br />
+            <span className="text-white/20">Build</span>
+          </h2>
+          <p className="mt-6 text-white/30 text-sm leading-relaxed max-w-xs">
+            A transparent, repeatable process designed around reducing risk and maximising output quality.
+          </p>
+
+          {/* Animated timeline line */}
+          <div className="relative mt-12 w-px h-48 bg-white/10 overflow-hidden">
+            <motion.div style={{ height: lineH }} className="absolute top-0 left-0 w-full bg-white" />
           </div>
+        </div>
 
-          <motion.div style={{ x }} className="flex gap-8 w-max px-6 md:px-20 pb-10">
-            {steps.map((step, i) => (
-              <div 
-                key={step.id} 
-                className="relative flex-shrink-0 w-[300px] md:w-[400px] h-[400px] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col justify-between group overflow-hidden shadow-2xl"
-              >
-                {/* Hover Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#6C63FF]/0 via-transparent to-[#00E5FF]/0 group-hover:from-[#6C63FF]/10 group-hover:to-[#00E5FF]/10 transition-colors duration-500" />
-                
-                <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-8">
-                    <span className="text-5xl font-black text-white/10 group-hover:text-white/20 transition-colors duration-500">{step.id}</span>
-                    <div className="w-14 h-14 rounded-2xl bg-[#6C63FF]/10 flex items-center justify-center text-[#6C63FF] group-hover:scale-110 group-hover:bg-[#6C63FF] group-hover:text-white transition-all duration-500 shadow-[0_0_15px_rgba(108,99,255,0)] group-hover:shadow-[0_0_20px_rgba(108,99,255,0.4)]">
-                      <step.icon className="w-7 h-7" />
-                    </div>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4 group-hover:text-[#00E5FF] transition-colors duration-500">{step.title}</h3>
-                  <p className="text-slate-400 leading-relaxed group-hover:text-slate-200 transition-colors duration-500">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mt-8 relative z-10">
-                  <div className="h-full bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] w-0 group-hover:w-full transition-all duration-1000 ease-out" />
-                </div>
+        {/* Right: steps */}
+        <div className="flex flex-col divide-y divide-white/10">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.num}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="group px-8 md:px-16 py-16 flex flex-col md:flex-row gap-8 md:gap-16 items-start hover:bg-white/[0.03] transition-colors duration-300"
+            >
+              {/* Number */}
+              <div className="flex-shrink-0">
+                <span className="text-[80px] md:text-[100px] font-black leading-none text-white/5 group-hover:text-white/10 transition-colors duration-500 select-none font-mono">
+                  {step.num}
+                </span>
               </div>
-            ))}
-          </motion.div>
+
+              {/* Content */}
+              <div className="flex-1 pt-4 md:pt-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-white transition-colors duration-300">
+                    {step.title}
+                  </h3>
+                  <span className="px-3 py-1 rounded-full bg-white/5 text-white/30 text-xs font-mono border border-white/10">
+                    {step.tag}
+                  </span>
+                </div>
+                <p className="text-white/40 text-lg leading-relaxed max-w-xl">
+                  {step.body}
+                </p>
+                <div className="mt-6 w-8 h-px bg-white/20 group-hover:w-16 group-hover:bg-white transition-all duration-500" />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,53 +1,100 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-export function FooterCTA() {
+export function Footer() {
   return (
-    <section className="relative min-h-[80vh] flex flex-col justify-center items-center bg-[#0F172A] overflow-hidden rounded-t-[3rem] md:rounded-t-[5rem] border-t border-white/5 mt-[-2rem] z-20">
-      
-      {/* Abstract Background Elements */}
-      <div className="absolute top-0 left-1/4 w-[50vw] h-[50vw] bg-[#6C63FF]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[50vw] h-[50vw] bg-[#00E5FF]/10 rounded-full blur-[120px] pointer-events-none" />
-      
-      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter mb-12">
-            Let's Build Something <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] italic">
-              Extraordinary.
-            </span>
-          </h2>
+    <section className="bg-black">
+      {/* Main CTA block */}
+      <div className="px-8 md:px-16 py-24 md:py-40 border-b border-white/10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#6C63FF] to-[#00E5FF] rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse" />
-              <button className="relative px-10 py-5 bg-white text-[#050816] rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-3 hover:bg-white/90">
-                Start a Project
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+        {/* Left: Big text */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-8 h-px bg-white/40" />
+              <span className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Start a Conversation</span>
             </div>
-            <button className="px-10 py-5 bg-[#050816] border border-white/20 text-white rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/5 hover:border-white/40">
-              Book a Consultation
-            </button>
+            <h2 className="text-[clamp(3rem,7vw,7rem)] font-black tracking-tighter text-white uppercase leading-none">
+              Let's<br />
+              <span className="text-white/20">Build</span><br />
+              Together.
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Right: CTA content */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col gap-8"
+        >
+          <p className="text-white/40 text-lg leading-relaxed">
+            Whether you have a detailed brief or just a concept on a napkin — we want to hear it.
+            Every engagement starts with a free 60-minute scoping call.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <motion.a
+              href="mailto:hello@qloax.com"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center justify-center gap-2 bg-white text-black text-base font-bold px-8 py-4 rounded-full hover:bg-white/80 transition-colors duration-200"
+              data-cursor
+            >
+              hello@qloax.com
+              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </motion.a>
+            <motion.a
+              href="#"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center justify-center gap-2 border border-white/20 text-white text-base font-bold px-8 py-4 rounded-full hover:border-white transition-colors duration-200"
+              data-cursor
+            >
+              Book a Call
+            </motion.a>
+          </div>
+
+          {/* Trust signals */}
+          <div className="pt-4 border-t border-white/10 grid grid-cols-3 gap-4">
+            {[
+              { val: "< 24h", label: "Response time" },
+              { val: "Free", label: "Initial consultation" },
+              { val: "NDA", label: "Signed on request" },
+            ].map(item => (
+              <div key={item.label}>
+                <p className="text-white font-bold text-lg">{item.val}</p>
+                <p className="text-white/30 text-xs font-mono mt-1">{item.label}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>
 
-      {/* Actual Footer Bottom */}
-      <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm border-t border-white/5">
-        <p>© 2026 Qloax. All rights reserved.</p>
-        <div className="flex gap-6 mt-4 md:mt-0">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+      {/* Footer bottom bar */}
+      <div className="px-8 md:px-16 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-xs text-white/20 font-mono">
+        <div className="flex items-center gap-3">
+          <div className="w-5 h-5 bg-white rounded-sm" />
+          <span className="text-white/40 font-bold">Qloax Technologies Pvt. Ltd.</span>
+        </div>
+        <div className="flex flex-wrap gap-8">
+          <span>India — Pune, MH</span>
+          <span>© 2024 All rights reserved</span>
+          <span>GST: 27AAAAA0000A1Z5</span>
+        </div>
+        <div className="flex gap-6">
           <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
           <a href="#" className="hover:text-white transition-colors">Twitter</a>
+          <a href="#" className="hover:text-white transition-colors">GitHub</a>
         </div>
       </div>
     </section>

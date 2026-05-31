@@ -2,104 +2,95 @@
 
 import { motion } from "framer-motion";
 
-const technologies = [
-  "React", "Next.js", "Spring Boot", "Node.js", 
-  "Java", "Python", "AWS", "Docker", 
-  "PostgreSQL", "MongoDB", "AI/ML", "TypeScript"
+const stack = [
+  {
+    category: "Frontend",
+    techs: ["React", "Next.js", "TypeScript", "Svelte", "React Native", "Flutter"],
+  },
+  {
+    category: "Backend",
+    techs: ["Node.js", "Spring Boot", "FastAPI", "Go", "GraphQL", "tRPC"],
+  },
+  {
+    category: "AI / ML",
+    techs: ["PyTorch", "TensorFlow", "LangChain", "OpenAI API", "Hugging Face", "scikit-learn"],
+  },
+  {
+    category: "Cloud & Infra",
+    techs: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"],
+  },
+  {
+    category: "Data",
+    techs: ["PostgreSQL", "MongoDB", "Redis", "Kafka", "Snowflake", "TimescaleDB"],
+  },
+  {
+    category: "Security",
+    techs: ["OWASP", "OAuth 2.0", "Zero-trust", "SOC 2", "HIPAA", "ISO 27001"],
+  },
 ];
 
-// Helper to generate random positions for floating effect
-const floatAnimation = (delay: number) => ({
-  y: ["-10px", "10px", "-10px"],
-  x: ["-5px", "5px", "-5px"],
-  transition: {
-    duration: 4 + Math.random() * 2,
-    repeat: Infinity,
-    ease: "easeInOut",
-    delay: delay,
-  }
-});
-
-export function TechEcosystem() {
+export function TechStack() {
   return (
-    <section className="py-32 bg-[#050816] relative overflow-hidden">
-      {/* Dynamic Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-white"
-          >
-            Technology Ecosystem
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-400 text-lg md:text-xl"
-          >
-            Powered by modern, enterprise-grade architecture.
-          </motion.p>
+    <section className="bg-black border-b border-white/10">
+      {/* Header */}
+      <div className="px-8 md:px-16 py-12 border-b border-white/10 flex items-end justify-between gap-8">
+        <div>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-white/40" />
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">Technology</span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
+            Our Stack
+          </h2>
         </div>
+        <p className="hidden md:block max-w-xs text-white/30 text-sm leading-relaxed text-right">
+          We choose technology based on the problem, not the trend.
+        </p>
+      </div>
 
-        <div className="relative h-[400px] md:h-[600px] w-full max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-4 md:gap-8">
-          
-          {/* Central Node */}
-          <motion.div 
-            animate={floatAnimation(0)}
-            className="relative z-20 flex items-center justify-center w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-[#6C63FF] to-[#8B5CF6] shadow-[0_0_50px_rgba(108,99,255,0.5)] border-4 border-[#050816]"
+      {/* Tech grid */}
+      <div className="divide-y divide-white/10">
+        {stack.map((row, i) => (
+          <motion.div
+            key={row.category}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="group grid grid-cols-[140px_1fr] md:grid-cols-[220px_1fr] gap-8 md:gap-16 px-8 md:px-16 py-8 hover:bg-white/[0.03] transition-colors duration-200"
           >
-            <span className="text-2xl md:text-3xl font-black text-white">QLOAX</span>
-          </motion.div>
+            {/* Category */}
+            <div className="flex items-start pt-1">
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-white/20 group-hover:text-white/50 transition-colors duration-200">
+                {row.category}
+              </span>
+            </div>
 
-          {/* Orbiting Tech Nodes */}
-          {technologies.map((tech, i) => {
-            const delay = i * 0.2;
-            const angle = (i / technologies.length) * Math.PI * 2;
-            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-            const radiusX = isMobile ? 130 : 280;
-            const radiusY = isMobile ? 160 : 220;
-            const rotation = (angle * 180) / Math.PI;
-
-            return (
-              <div key={tech}>
-                {/* Connecting Line */}
-                <motion.div
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  whileInView={{ opacity: 1, scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: delay + 0.5, ease: "easeOut" }}
-                  className="absolute top-1/2 left-1/2 h-[1px] bg-gradient-to-r from-[#6C63FF]/50 to-transparent origin-left z-0 pointer-events-none"
-                  style={{
-                    width: `${Math.sqrt(radiusX * radiusX + radiusY * radiusY) - 60}px`,
-                    transform: `rotate(${rotation}deg)`,
-                  }}
-                />
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
+            {/* Tech list */}
+            <div className="flex flex-wrap gap-3">
+              {row.techs.map((tech, j) => (
+                <motion.span
+                  key={tech}
+                  initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  animate={floatAnimation(delay)}
-                  className="absolute z-10 px-6 py-3 rounded-full bg-[#0F172A] border border-[#6C63FF]/30 backdrop-blur-md shadow-[0_0_20px_rgba(108,99,255,0.15)] flex items-center justify-center hover:border-[#00E5FF] hover:text-[#00E5FF] hover:shadow-[0_0_30px_rgba(0,229,255,0.3)] transition-all cursor-default"
-                  style={{
-                    left: `calc(50% + ${Math.cos(angle) * radiusX}px)`,
-                    top: `calc(50% + ${Math.sin(angle) * radiusY}px)`,
-                    transform: "translate(-50%, -50%)"
-                  }}
+                  transition={{ duration: 0.4, delay: i * 0.06 + j * 0.04 }}
+                  whileHover={{ y: -2, backgroundColor: "rgba(255,255,255,1)", color: "#000" }}
+                  className="px-3 py-1.5 rounded border border-white/10 text-white/40 text-sm font-mono hover:border-white transition-colors duration-200 cursor-default"
                 >
-                  <span className="text-slate-300 font-semibold">{tech}</span>
-                </motion.div>
-              </div>
-            );
-          })}
-          
-        </div>
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Bottom note */}
+      <div className="px-8 md:px-16 py-6 border-t border-white/10">
+        <p className="text-white/20 text-xs font-mono">
+          Not in the list? We evaluate new technology on a project-by-project basis. Ask us.
+        </p>
       </div>
     </section>
   );

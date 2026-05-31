@@ -1,133 +1,197 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
-export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const WORDS = ["Products", "Platforms", "Experiences", "Systems"];
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
+function RotatingBadge() {
+  return (
+    <div className="relative w-28 h-28 flex items-center justify-center">
+      <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full animate-[spin_12s_linear_infinite]">
+        <defs>
+          <path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+        </defs>
+        <text className="fill-[#555] text-[11px] font-medium tracking-widest uppercase">
+          <textPath href="#circle">Qloax Studio · Since 2019 · Est. India ·</textPath>
+        </text>
+      </svg>
+      <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+        <ArrowUpRight className="w-5 h-5 text-black" />
+      </div>
+    </div>
+  );
+}
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+function CustomCursor() {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
+    const move = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
+    const over = (e: MouseEvent) => {
+      if ((e.target as Element).closest("a, button, [data-cursor]")) setHovered(true);
+      else setHovered(false);
     };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseover", over);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseover", over);
+    };
   }, []);
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050816]"
-    >
-      {/* Dynamic Grid / Noise Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
-      <div className="absolute inset-0 bg-[#050816] opacity-60 pointer-events-none mix-blend-multiply" />
-
-      {/* Mouse Reactive Glow */}
+    <>
       <motion.div
-        className="pointer-events-none absolute inset-0 z-0 opacity-50 transition-all duration-300 ease-out"
-        style={{
-          background: `radial-gradient(circle 800px at ${mousePosition.x}px ${mousePosition.y}px, rgba(108, 99, 255, 0.12), transparent 70%)`,
-        }}
-      />
-
-      {/* Floating Gradient Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] bg-[#6C63FF]/15 rounded-full blur-[150px] mix-blend-screen animate-blob pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[40rem] h-[40rem] bg-[#00E5FF]/15 rounded-full blur-[150px] mix-blend-screen animate-blob animation-delay-2000 pointer-events-none" />
-
-      <motion.div 
-        style={{ y, opacity }}
-        className="relative z-10 container mx-auto px-6 text-center max-w-5xl mt-20"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
+        animate={{ x: pos.x - (hovered ? 24 : 4), y: pos.y - (hovered ? 24 : 4) }}
+        transition={{ type: "spring", stiffness: 800, damping: 35, mass: 0.3 }}
       >
+        <div className={`rounded-full bg-white transition-all duration-200 ${hovered ? "w-12 h-12" : "w-2 h-2"}`} />
+      </motion.div>
+      <motion.div
+        className="fixed top-0 left-0 z-[9998] pointer-events-none"
+        animate={{ x: pos.x - 20, y: pos.y - 20 }}
+        transition={{ type: "spring", stiffness: 200, damping: 25, mass: 0.5 }}
+      >
+        <div className="w-10 h-10 rounded-full border border-white/20" />
+      </motion.div>
+    </>
+  );
+}
+
+function TextReveal({ children, delay = 0, className = "" }: { children: string; delay?: number; className?: string }) {
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        initial={{ y: "110%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+export function Hero() {
+  const [wordIdx, setWordIdx] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  useEffect(() => {
+    const t = setInterval(() => setWordIdx(i => (i + 1) % WORDS.length), 2200);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <>
+      <CustomCursor />
+      <section
+        ref={containerRef}
+        className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-black border-b border-white/10"
+      >
+        {/* Subtle grain texture overlay */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMSIvPjwvc3ZnPg==')] pointer-events-none" />
+
+        {/* Hero Body */}
+        <motion.div style={{ y, opacity }} className="flex-1 flex flex-col justify-center px-8 md:px-16 pt-24 pb-8">
+
+          {/* Eyebrow */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex items-center gap-3 mb-10"
+          >
+            <span className="w-8 h-px bg-white/60" />
+            <span className="text-xs font-bold tracking-[0.3em] uppercase text-white/40">
+              IT Services · AI Solutions · Product Engineering
+            </span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <h1 className="text-[clamp(3rem,9vw,10rem)] font-black leading-[0.88] tracking-tighter text-white mb-4 uppercase">
+            <TextReveal delay={0.4}>We Engineer</TextReveal>
+            <div className="flex items-end gap-4 flex-wrap">
+              <TextReveal delay={0.55} className="text-white/30 italic">Digital</TextReveal>
+              <div className="overflow-hidden mb-1.5">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={wordIdx}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="block"
+                  >
+                    {WORDS[wordIdx]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
+            <TextReveal delay={0.7} className="text-white/10">That Scale.</TextReveal>
+          </h1>
+
+          {/* Divider line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.2, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full h-px bg-white/10 my-12 origin-left"
+          />
+
+          {/* Bottom row */}
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+              className="text-white/40 text-lg md:text-xl max-w-md leading-relaxed font-light"
+            >
+              Qloax partners with ambitious companies to build the software and AI systems
+              that define their next decade of growth.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+              className="flex items-center gap-6"
+            >
+              <RotatingBadge />
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="hidden md:flex items-center gap-2 bg-white text-black text-sm font-bold px-6 py-3 rounded-full hover:bg-white/80 transition-colors"
+                data-cursor
+              >
+                Get Started <ArrowUpRight className="w-4 h-4" />
+              </motion.button>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Bottom status bar */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-block mb-8 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_20px_rgba(108,99,255,0.1)] hover:border-white/20 transition-colors"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.3 }}
+          className="flex items-center justify-between px-8 md:px-16 py-5 border-t border-white/10 text-xs text-white/20 font-mono"
         >
-          <span className="text-xs font-bold text-[#00E5FF] tracking-widest uppercase">
-            Qloax Digital Studio
-          </span>
+          <span>© 2024 Qloax Technologies</span>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span>Available for new projects</span>
+          </div>
+          <span>EST. INDIA — 2019</span>
         </motion.div>
-
-        <motion.h1 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-6xl md:text-8xl lg:text-[6rem] font-bold tracking-tighter leading-[1.02] mb-8 text-white drop-shadow-2xl"
-        >
-          Engineering Digital Products That <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] via-[#8B5CF6] to-[#00E5FF] drop-shadow-[0_0_30px_rgba(108,99,255,0.3)]">
-            Drive Business Growth
-          </span>
-        </motion.h1>
-
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="text-xl md:text-2xl text-slate-400 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
-        >
-          From AI-powered platforms to enterprise software, Qloax transforms ideas into scalable digital solutions.
-        </motion.p>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
-        >
-          <motion.button 
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            className="group px-8 py-4 bg-[#6C63FF] hover:bg-[#8B5CF6] text-white rounded-full font-semibold transition-all duration-300 flex items-center gap-3 shadow-[0_0_30px_-5px_rgba(108,99,255,0.4)] hover:shadow-[0_0_50px_-5px_rgba(108,99,255,0.6)]"
-          >
-            Start Your Project
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-          
-          <motion.button 
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="group px-8 py-4 bg-transparent border border-white/20 hover:border-white/50 text-white rounded-full font-semibold transition-all duration-300 flex items-center gap-3 hover:bg-white/5"
-          >
-            Explore Solutions
-          </motion.button>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500"
-      >
-        <span className="text-sm font-medium tracking-widest uppercase">Scroll to explore</span>
-        <motion.div 
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="w-5 h-5" />
-        </motion.div>
-      </motion.div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -22,6 +22,8 @@ export function Navigation() {
     { name: "Concept 1 ", href: "/" },
     { name: "Concept 2 ", href: "/solutions" },
     { name: "Concept 3 ", href: "/concept3" },
+    { name: "Concept 4 ", href: "/concept4" },
+    { name: "Concept 5 ", href: "/concept5" },
   ];
 
   return (
