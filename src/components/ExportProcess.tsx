@@ -24,7 +24,7 @@ export default function ExportProcess() {
 
   return (
     <section ref={ref} id="process" className="py-40 bg-background">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-26">
         <div className="flex flex-col md:flex-row justify-between items-end mb-32">
           <div className="max-w-2xl">
             {/* Top Badge matching Hero */}
@@ -35,7 +35,7 @@ export default function ExportProcess() {
               </span>
             </div>
             <h2 className="text-4xl md:text-6xl font-heading text-dark font-light leading-[1.1]">
-              Our Seamless <br/>
+              Our Seamless <br />
               <span className="italic text-secondary">Export Process</span>
             </h2>
           </div>
@@ -48,11 +48,11 @@ export default function ExportProcess() {
           {/* Connecting Line Base */}
           <div className="absolute top-[50px] left-[5%] w-[90%] h-[1px] bg-dark/5 hidden lg:block"></div>
           {/* Animated Connecting Line */}
-          <motion.div 
-            style={{ scaleX, transformOrigin: "left" }} 
+          <motion.div
+            style={{ scaleX, transformOrigin: "left" }}
             className="absolute top-[50px] left-[5%] w-[90%] h-[1px] bg-secondary hidden lg:block z-0"
           ></motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-16 relative z-10">
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -68,7 +68,7 @@ export default function ExportProcess() {
                   <div className="w-24 h-24 bg-white border border-dark/5 flex items-center justify-center mb-10 group-hover:border-secondary transition-all duration-500 relative z-10 shadow-sm group-hover:shadow-xl">
                     <Icon size={24} className="text-dark/30 group-hover:text-secondary transition-colors duration-500" />
                   </div>
-                  
+
                   <div className="w-full">
                     <div className="text-secondary text-[10px] font-bold mb-4 uppercase tracking-[0.3em]">Step 0{index + 1}</div>
                     <h3 className="font-heading text-dark text-xl mb-4 font-light tracking-wide">{step.title}</h3>

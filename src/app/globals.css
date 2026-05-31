@@ -3,20 +3,52 @@
 @tailwind utilities;
 
 @layer base {
+  :root, .dark {
+    /* Background: Pitch Black */
+    --background: 0 0% 3%;
+    /* Foreground (Headers): Pure White */
+    --foreground: 0 0% 100%;
+
+    /* Cards/Sections: Slightly elevated black */
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 100%;
+ 
+    /* Primary: Bright Aggressive Red */
+    --primary: 350 89% 60%;
+    --primary-foreground: 0 0% 100%;
+ 
+    /* Secondary/Muted Backgrounds: Dark Grey */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+ 
+    /* Muted (Borders): Very dark grey */
+    --muted: 0 0% 12%;
+    /* Muted Foreground (Paragraphs): Clear Grey */
+    --muted-foreground: 0 0% 60%;
+ 
+    --accent: 350 89% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+
   body {
-    @apply bg-background text-dark font-body antialiased;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading text-primary;
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Custom Utilities for smooth animations */
-.glass-panel {
-  @apply bg-white/10 backdrop-blur-md border border-white/20;
-}
-
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-glass;
+  }
+  .dark .glass {
+    @apply bg-black/40 border-white/10 shadow-glass-dark;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
 }

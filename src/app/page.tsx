@@ -1,65 +1,50 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import FounderStoryPreview from "@/components/FounderStoryPreview";
-import ProductsSection from "@/components/ProductsSection";
-import ExportProcess from "@/components/ExportProcess";
-import Certifications from "@/components/Certifications";
-import Footer from "@/components/Footer";
+import { Hero } from "@/components/concept2/Hero";
+import { LogoCloud } from "@/components/concept2/LogoCloud";
+import { StickyScroll } from "@/components/concept2/StickyScroll";
+import { BentoGrid } from "@/components/concept2/BentoGrid";
+import { WhatWeDo } from "@/components/concept2/WhatWeDo";
+import { Blog } from "@/components/concept2/Blog";
 
-export default function Home() {
+export default function Concept2Page() {
   return (
-    <main className="min-h-screen bg-background text-dark font-body">
-      <Navbar />
+    <div className="min-h-screen bg-background">
       <Hero />
-      <FounderStoryPreview />
-      <ProductsSection />
-      <ExportProcess />
-      <Certifications />
+      <LogoCloud />
+      <WhatWeDo />
+      <StickyScroll />
+      <BentoGrid />
+      <Blog />
+      
+      {/* Final Massive CTA */}
+      <section className="py-32 md:py-48 bg-black text-white relative overflow-hidden flex items-center justify-center">
+        {/* Computer/Workspace Background Image */}
+        <img 
+          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80" 
+          alt="Modern Workspace" 
+          className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-40 brightness-75"
+        />
+        
+        {/* Deep Space Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[600px] bg-black/20 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Inquiry CTA Section */}
-      <section className="py-48 bg-dark relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          
-          {/* Top Badge matching Hero style (adapted for dark) */}
-          <div className="inline-flex items-center gap-3 px-4 py-2 border border-secondary/30 mb-10 bg-white/5 backdrop-blur-sm mx-auto">
-            <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-            <span className="text-secondary tracking-[0.4em] uppercase text-[10px] font-medium">
-              Get In Touch
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-7xl font-heading text-white mb-10 tracking-tight font-light leading-[1.1]">
-            Experience the Gold Standard <br/>
-            <span className="italic text-secondary">in International Trade</span>
+        <div className="max-w-5xl mx-auto px-8 md:px-16 py-16 md:py-24 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-md flex flex-col items-center text-center relative z-10 shadow-2xl">
+          <h2 className="text-[10vw] sm:text-[6vw] lg:text-[6rem] leading-[0.95] font-bold tracking-tight mb-8">
+            Start building <br />
+            your future.
           </h2>
-
-          <p className="text-white/30 max-w-2xl mx-auto mb-16 text-lg font-light leading-relaxed">
-            Partner with us for bespoke export solutions. From custom packaging to global logistics, we ensure India's finest reaches you with absolute integrity.
+          <p className="text-xl md:text-2xl text-white/90 font-medium tracking-wide mb-12 max-w-2xl">
+            Empower your team with cutting-edge tools to design, deploy, and scale world-class web applications faster than ever.
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <button className="bg-secondary text-dark px-12 py-5 font-body tracking-[0.2em] uppercase text-[10px] font-bold hover:bg-white transition-all duration-500 w-full sm:w-auto">
-              Request a Quote
+          <div className="flex flex-col sm:flex-row gap-6">
+            <button className="px-12 py-5 bg-white text-red-500 text-xl font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-xl">
+              Get Started
             </button>
-            <button className="bg-transparent border border-white/20 text-white px-12 py-5 font-body tracking-[0.2em] uppercase text-[10px] hover:border-secondary hover:text-secondary transition-all duration-500 w-full sm:w-auto">
+            <button className="px-12 py-5 bg-transparent border border-white/30 text-white text-xl font-bold rounded-full hover:bg-white/10 transition-colors duration-300">
               Contact Sales
             </button>
           </div>
         </div>
       </section>
-
-      <Footer />
-
-      {/* WhatsApp Floating Button */}
-      <a
-        href="https://wa.me/919876543210"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform z-50 flex items-center justify-center border border-white/20"
-      >
-        <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="css-i6dzq1"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-      </a>
-    </main>
+    </div>
   );
 }

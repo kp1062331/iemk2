@@ -75,7 +75,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 sm:px-12 lg:px-16 relative z-10 pt-32 pb-20 lg:py-0 w-full">
+      <div className="container mx-auto px-6 sm:px-12 lg:px-16 relative z-10 pt-22 pb-20 lg:py-0 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-10 xl:gap-16">
 
           {/* Left Content Column */}
