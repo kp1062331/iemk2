@@ -6,7 +6,7 @@ import { Brain, Cloud, Code2, Cpu, LineChart, Server } from "lucide-react";
 
 const nodes = [
   { id: 1, label: "AI Solutions", icon: Brain, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/30", description: "Machine learning, NLP, and computer vision models deployed at scale." },
-  { id: 2, label: "Cloud Infrastructure", icon: Cloud, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/30", description: "Multi-cloud architecture, serverless deployments, and secure networks." },
+  { id: 2, label: "Cloud Infrastructure", icon: Cloud, color: "text-red-400", bg: "bg-red-500/10", border: "border-red-500/30", description: "Multi-cloud architecture, serverless deployments, and secure networks." },
   { id: 3, label: "Enterprise Software", icon: Server, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/30", description: "Mission-critical applications built for robust enterprise environments." },
   { id: 4, label: "Product Engineering", icon: Code2, color: "text-rose-400", bg: "bg-rose-500/10", border: "border-rose-500/30", description: "End-to-end software development from prototyping to production." },
   { id: 5, label: "Automation", icon: Cpu, color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/30", description: "Intelligent process automation and robotics integrations." },
@@ -20,12 +20,12 @@ export function Ecosystem() {
       <div className="absolute top-0 left-0 w-full h-48 bg-gradient-to-b from-[#050505] to-transparent pointer-events-none z-50" />
       
       {/* Subtle Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(37,99,235,0.05)_0%,_transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(220,38,38,0.05)_0%,_transparent_50%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-32 relative z-40">
-          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-4">Technology Ecosystem</h2>
+          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-red-600 mb-4">Technology Ecosystem</h2>
           <p className="text-4xl md:text-5xl font-bold tracking-tight text-[#111] mb-6">
             A unified architecture for continuous innovation.
           </p>
@@ -49,11 +49,11 @@ export function Ecosystem() {
                 className="relative flex items-center justify-end group"
               >
                 {/* Horizontal Connection Line to Center (Desktop Only) */}
-                <div className="absolute top-1/2 -translate-y-1/2 w-[20vw] h-px bg-gradient-to-r from-transparent via-blue-500/40 to-blue-600 right-[-20vw] hidden lg:block opacity-30 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute top-1/2 right-0 w-2 h-2 rounded-full bg-blue-600 -translate-y-1/2 shadow-[0_0_10px_rgba(37,99,235,0.8)]" />
+                <div className="absolute top-1/2 -translate-y-1/2 w-[20vw] h-px bg-gradient-to-r from-transparent via-red-500/40 to-red-600 right-[-20vw] hidden lg:block opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute top-1/2 right-0 w-2 h-2 rounded-full bg-red-600 -translate-y-1/2 shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
                 </div>
 
-                <div className="w-full bg-white border border-black/5 rounded-[2rem] p-6 shadow-sm hover:shadow-xl transition-all duration-500 flex gap-6 items-center hover:-translate-y-1 group-hover:border-blue-500/20">
+                <div className="w-full bg-white border border-black/5 rounded-[2rem] p-6 shadow-sm hover:shadow-xl transition-all duration-500 flex gap-6 items-center hover:-translate-y-1 group-hover:border-red-500/20">
                   <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${node.bg.replace('/10','/5')} border border-black/5 group-hover:scale-110 transition-transform duration-500`}>
                     <node.icon className={`w-8 h-8 ${node.color.replace('400','600')}`} />
                   </div>
@@ -77,20 +77,20 @@ export function Ecosystem() {
             <div className="relative w-64 h-64 flex items-center justify-center">
               {/* Outer Decorative Rings */}
               <div className="absolute inset-0 rounded-full border border-black/5 animate-[spin_12s_linear_infinite]" />
-              <div className="absolute -inset-8 rounded-full border border-blue-500/20 border-dashed animate-[spin_24s_linear_infinite_reverse]" />
+              <div className="absolute -inset-8 rounded-full border border-red-500/20 border-dashed animate-[spin_24s_linear_infinite_reverse]" />
               <div className="absolute -inset-16 rounded-full border border-purple-500/10 animate-[spin_36s_linear_infinite]" />
               
               {/* Core Body */}
-              <div className="w-56 h-56 bg-white rounded-full shadow-[0_20px_80px_rgba(37,99,235,0.15)] flex flex-col items-center justify-center relative z-20 border border-black/[0.03]">
+              <div className="w-56 h-56 bg-white rounded-full shadow-[0_20px_80px_rgba(220,38,38,0.15)] flex flex-col items-center justify-center relative z-20 border border-black/[0.03]">
                 {/* Inner Pulse */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-50 to-transparent opacity-50" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-50 to-transparent opacity-50" />
                 
-                <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mb-3 relative shadow-inner">
-                  <div className="absolute inset-0 rounded-full border border-blue-200 animate-ping opacity-20" />
-                  <Cpu className="w-10 h-10 text-blue-600" />
+                <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-3 relative shadow-inner">
+                  <div className="absolute inset-0 rounded-full border border-red-200 animate-ping opacity-20" />
+                  <Cpu className="w-10 h-10 text-red-600" />
                 </div>
-                <span className="font-bold text-2xl tracking-[0.25em] ml-1 text-[#111] bg-clip-text text-transparent bg-gradient-to-br from-[#111] to-blue-900">QLOAX</span>
-                <span className="text-[10px] uppercase tracking-widest text-blue-600/60 font-bold mt-2">Core Engine</span>
+                <span className="font-bold text-2xl tracking-[0.25em] ml-1 text-[#111] bg-clip-text text-transparent bg-gradient-to-br from-[#111] to-red-900">QLOAX</span>
+                <span className="text-[10px] uppercase tracking-widest text-red-600/60 font-bold mt-2">Core Engine</span>
               </div>
             </div>
           </motion.div>
@@ -107,11 +107,11 @@ export function Ecosystem() {
                 className="relative flex items-center justify-start group"
               >
                 {/* Horizontal Connection Line to Center (Desktop Only) */}
-                <div className="absolute top-1/2 -translate-y-1/2 w-[20vw] h-px bg-gradient-to-l from-transparent via-blue-500/40 to-blue-600 left-[-20vw] hidden lg:block opacity-30 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute top-1/2 left-0 w-2 h-2 rounded-full bg-blue-600 -translate-y-1/2 shadow-[0_0_10px_rgba(37,99,235,0.8)]" />
+                <div className="absolute top-1/2 -translate-y-1/2 w-[20vw] h-px bg-gradient-to-l from-transparent via-red-500/40 to-red-600 left-[-20vw] hidden lg:block opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute top-1/2 left-0 w-2 h-2 rounded-full bg-red-600 -translate-y-1/2 shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
                 </div>
 
-                <div className="w-full bg-white border border-black/5 rounded-[2rem] p-6 shadow-sm hover:shadow-xl transition-all duration-500 flex gap-6 items-center hover:-translate-y-1 group-hover:border-blue-500/20">
+                <div className="w-full bg-white border border-black/5 rounded-[2rem] p-6 shadow-sm hover:shadow-xl transition-all duration-500 flex gap-6 items-center hover:-translate-y-1 group-hover:border-red-500/20">
                   <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 ${node.bg.replace('/10','/5')} border border-black/5 group-hover:scale-110 transition-transform duration-500`}>
                     <node.icon className={`w-8 h-8 ${node.color.replace('400','600')}`} />
                   </div>

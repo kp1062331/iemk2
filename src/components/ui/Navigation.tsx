@@ -21,7 +21,7 @@ export function Navigation() {
   const navLinks = [
     { name: "Concept 1 ", href: "/" },
     { name: "Concept 2 ", href: "/solutions" },
-    
+    { name: "Concept 3 ", href: "/concept3" },
   ];
 
   return (

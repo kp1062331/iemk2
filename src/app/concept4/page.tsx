@@ -11,7 +11,7 @@ import { CTA } from "@/components/concept4/CTA";
 
 export default function Concept4Page() {
   return (
-    <main className="bg-[#F9F8F4] text-[#111] min-h-screen selection:bg-blue-500/20 selection:text-blue-900">
+    <main className="bg-[#F9F8F4] text-[#111] min-h-screen selection:bg-red-500/20 selection:text-red-900">
       <Hero />
       <Ecosystem />
       <Services />

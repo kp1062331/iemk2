@@ -13,13 +13,13 @@ export function Vision() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-5xl mx-auto"
         >
-          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-8">Future Vision</h2>
+          <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-red-600 mb-8">Future Vision</h2>
           <h3 className="text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tighter leading-[1.1] mb-12">
             Building the <br />
             <span className="text-black/30 italic font-serif">next generation</span> <br />
             of digital experiences.
           </h3>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-12 shadow-[0_0_15px_rgba(37,99,235,0.2)]" />
+          <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-purple-600 mx-auto rounded-full mb-12 shadow-[0_0_15px_rgba(220,38,38,0.2)]" />
           <p className="text-xl md:text-2xl text-black/60 max-w-3xl mx-auto leading-relaxed font-light">
             We don't just write code. We architect solutions that redefine how humans interact with technology. Join us in shaping the digital frontier.
           </p>
@@ -27,7 +27,7 @@ export function Vision() {
       </div>
       
       {/* Abstract Background Element */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
     </section>
   );

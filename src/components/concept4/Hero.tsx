@@ -24,10 +24,11 @@ export function Hero() {
   const gridScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
   const gridOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const vignetteOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -800]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <div ref={containerRef} className="relative h-[200vh]">
+    <div ref={containerRef} className="relative h-[150vh]">
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
         
@@ -55,7 +56,7 @@ export function Hero() {
                 }}
                 className={`relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/5 shadow-2xl ${img.span} group`}
               >
-                <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay group-hover:bg-blue-500/0 transition-colors duration-700 z-10" />
+                <div className="absolute inset-0 bg-red-500/10 mix-blend-overlay group-hover:bg-red-500/0 transition-colors duration-700 z-10" />
                 <img 
                   src={img.src} 
                   alt="" 
@@ -68,8 +69,8 @@ export function Hero() {
 
         {/* Text Content */}
         <motion.div 
-          style={{ y: textY }}
-          className="relative z-30 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl"
+          style={{ y: textY, opacity: textOpacity }}
+          className="relative z-30 flex flex-col items-center justify-center text-center px-6 w-full max-w-5xl -mt-24"
         >
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
@@ -79,7 +80,7 @@ export function Hero() {
           >
             Run your entire <br className="hidden md:block" />
             business from <br className="hidden md:block" />
-            <span className="italic text-blue-500 font-serif font-light tracking-tight">one place.</span>
+            <span className="italic text-red-500 font-serif font-light tracking-tight">one place.</span>
           </motion.h1>
           
           <motion.p 
@@ -96,7 +97,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
           >
-            <button className="group px-10 py-5 bg-white text-black hover:bg-blue-600 hover:text-white font-bold text-lg rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_10px_40px_-10px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_50px_-10px_rgba(37,99,235,0.6)] hover:-translate-y-1">
+            <button className="group px-10 py-5 bg-white text-black hover:bg-red-600 hover:text-white font-bold text-lg rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_10px_40px_-10px_rgba(255,255,255,0.2)] hover:shadow-[0_15px_50px_-10px_rgba(220,38,38,0.6)] hover:-translate-y-1">
               Start Building
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
             </button>

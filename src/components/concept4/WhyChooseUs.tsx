@@ -9,8 +9,8 @@ const reasons = [
     icon: Zap,
     title: "Unmatched Performance",
     description: "Built for speed. Our architecture ensures your digital products perform flawlessly under massive global load.",
-    color: "text-blue-500",
-    bg: "bg-blue-500/10"
+    color: "text-red-500",
+    bg: "bg-red-500/10"
   },
   {
     icon: Maximize,
@@ -45,7 +45,7 @@ export function WhyChooseUs() {
           
           {/* Intro text as the first item in the scrolling track */}
           <div className="w-[85vw] md:w-[500px] flex-shrink-0">
-            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600 mb-4">Why Qloax</h2>
+            <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-red-600 mb-4">Why Qloax</h2>
             <h3 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
               The architecture <br /> of advantage.
             </h3>
@@ -61,7 +61,7 @@ export function WhyChooseUs() {
               <div className={`relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 ${reason.bg.replace('/10','/5')} ${reason.color.replace('400','600')} border border-black/5 group-hover:scale-110 transition-transform duration-500 bg-white shadow-sm`}>
                 <reason.icon className="w-10 h-10" />
               </div>
-              <h4 className="relative z-10 text-3xl md:text-4xl font-bold mb-6 group-hover:text-blue-600 transition-colors duration-300">{reason.title}</h4>
+              <h4 className="relative z-10 text-3xl md:text-4xl font-bold mb-6 group-hover:text-red-600 transition-colors duration-300">{reason.title}</h4>
               <p className="relative z-10 text-xl text-black/60 leading-relaxed">{reason.description}</p>
             </div>
           ))}
